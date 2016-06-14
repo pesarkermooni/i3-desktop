@@ -1,0 +1,1 @@
+urxvt -bg grey17 -fg grey67 -fn "xft:Mono Space:pixelsize=13" +sb -depth 32 -cr grey67 -pr white -uc -bc -sl 100000
