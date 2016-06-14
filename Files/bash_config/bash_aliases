@@ -1,0 +1,10 @@
+# copy texts in ~/.bash_aliases or ~/.bashrc
+
+alias urxvt='urxvt -bg grey17 -fg grey67 -fn "xft:Mono Space:pixelsize=13" +sb -depth 32 -pr white -uc -bc -sl 100000'
+alias profanity='profanity -a USER@DOMAIN'
+alias i3conf='vim ~/.i3/config'
+alias i3dir='cd ~/.i3/Files'
+vp () { mplayer -geometry 640x360+340+370 "$@"; clear; }
+alias mplayer='vp'
+
+# See more: https://github.com/rasoolsn/DotFiles/blob/master/bash_aliases
