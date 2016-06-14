@@ -1,0 +1,376 @@
+#################################
+########## i3WM Config ##########
+#################################
+
+
+# Dependency:
+# compton, conky, dzen2, feh, fonts-droid, imagemagick, rofi, rxvt, scrot, slim
+# optional: kbdd, lxappearance, mlterm, mplayer, profanity, redshift, telegram, xcalib
+
+
+################ Variables ##################
+
+
+# Custom Variable:
+set $urxvt urxvt -bg grey17 -fg grey67 -fn "xft:Mono Space:pixelsize=13" +sb -depth 32 -pr white -uc -bc -sl 100000
+set $float floating enable border pixel 0
+set $move move container to workspace
+set $PATH ~/.i3
+set $PATH_IS ~/Shell_Script/interactive_script
+
+# Workspace Name:
+set $ws1 "1:  Desktop"
+set $ws2 "2:  Chat"
+set $ws3 "3:  Media"
+set $ws4 "4:  Monitor"
+
+# Default keybindings:
+# Set Default Key:
+set $mod Mod4
+# mod1= Alt Key
+# mod4= Win Key
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+
+################ Shortcuts ##################
+
+
+# Volume:
+bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+
+bindsym XF86AudioLowerVolume exec amixer sset Master 5%-
+bindsym XF86AudioMute exec amixer sset Master toggle
+
+# Font:
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango:Droid Sans 10
+
+# start a terminal:
+bindsym $mod+Return exec $urxvt -name "Main"
+
+# kill focused window:
+bindsym $mod+q kill
+
+# change focus:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation:
+bindsym $mod+h split h
+
+# split in vertical orientation:
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container:
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split):
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating:
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows:
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container:
+bindsym $mod+a focus parent
+
+# focus the child container:
+bindsym $mod+s focus child
+
+# switch to workspace:
+bindsym $mod+z workspace $ws1
+bindsym $mod+x workspace $ws2
+bindsym $mod+c workspace $ws3
+bindsym $mod+4 workspace $ws4
+
+# move focused container to workspace:
+bindsym $mod+Shift+z move container to workspace $ws1
+bindsym $mod+Shift+x move container to workspace $ws2
+bindsym $mod+Shift+c move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+
+# navigate workspaces next / previous:
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3):
+bindsym $mod+shift+r restart
+
+# exit i3 (logs you out of your X session):
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# reload i3
+bindsym $mod+shift+v reload
+
+# Moving containers/workspaces to RandR outputs:
+## bindsym $mod+m move workspace to output right (or VGA)
+
+# resize window (you can also use the mouse for that)
+bindsym $mod+r mode "resize"
+mode "resize" {
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Layout mode for new containers:
+workspace_layout tabbed
+
+# Border style for new windows: (normal | pixel)
+new_window pixel 2
+new_float pixel 2
+
+# Hiding vertical borders: (none|vertical|horizontal|both)
+hide_edge_borders both
+
+# Automatically putting workspaces on specific screens:
+## xrandr --current
+## workspace 1 output LVDS1
+
+# Configuring your monitors:
+## xrandr --output VGA1 --auto --left-of LVDS1
+
+# Changing colors:
+# class                 border  backgr. text    
+client.focused          #357AC3 #357AC3 #dedede 
+client.focused_inactive #2d2d2d #2d2d2d #dedede 
+client.unfocused        #2d2d2d #2d2d2d #dedede 
+client.urgent           #2d2d2d #2d2d2d #dedede
+## client.placeholder    #000000 #0c0c0c #ffffff #000000
+## client.background     #ffffff
+
+# Focus follows mouse:
+focus_follows_mouse no
+
+# Focus wrapping:
+## force_focus_wrapping yes
+
+# Mouse wrping: (for diffrent Screen)
+mouse_warping none
+
+# Popups during fullscreen mode: (smart|ignore|leave_fullscreen)
+popup_during_fullscreen smart
+
+# Automatic back-and-forth when switching to the current workspace:
+## workspace_auto_back_and_forth yes
+
+# Delaying urgency hint reset on workspace change:
+## force_display_urgency_hint 0 ms
+## for_window [urgent=latest] focus 
+
+
+################ Statusbar ##################
+
+
+# Dzen2 Statusbar:
+exec --no-startup-id $PATH/Files/dzen2/ubustrap/udzen.sh
+
+# i3bar control:
+# bar hidden_state hide|show|toggle [<bar_id>]
+# bar mode dock|hide|invisible|toggle [<bar_id>]
+## bindsym $mod+b bar mode hide bar-1
+
+## bindsym $mod+b bar mode toggle bar-1
+## bar {
+## 	status_command conky -c $PATH/Files/conky/i3status-conky/conky.conf
+## 	## status_command i3blocks -c ~/i3blocks.conf
+## 	## separator_symbol ":|:"
+## 	## status_command i3status --config ~/.i3status.conf
+## 	font pango:Droid Sans, FontAwesome 10
+## 	mode dock
+## 	id bar-1
+## 	position top
+## 	output VGA-1
+##         strip_workspace_numbers yes
+##         ## tray_padding 1
+## 	# tray_output none #(primary,LVDS1)
+## 	## workspace_buttons no
+## 	## binding_mode_indicator yes		
+## 
+## colors {
+##         background #2d2d2d
+##         statusline #dedede
+##         separator #2d2d2d
+## 
+##         focused_workspace  #357AC3 #357AC3 #dedede
+##         active_workspace   #2d2d2d #5f676a #dedede
+##         inactive_workspace #2d2d2d #2d2d2d #888888
+##         urgent_workspace   #2d2d2d #2d2d2d #888888
+##     }
+## 
+## }
+
+
+################ Screenshot #################
+
+
+# ScreenShot
+bindsym Print exec "scrot -e 'mv $f ~/Screenshots'"
+bindsym $mod+shift+Print --release exec "scrot -ue 'mv $f ~/Screenshots'"
+bindsym $mod+Print --release exec "scrot -se 'mv $f ~/Screenshots'"
+
+
+############# Stop & Cont App ####%##########
+
+
+# Firefox
+bindsym $mod+F9 --release exec killall -SIGSTOP firefox
+bindsym $mod+shift+F9 --release exec killall -SIGCONT firefox
+
+# Conky
+bindsym $mod+F10 --release exec $PATH/Files/conky/dzen-conky/kill_script/kill_stop-cont_script.sh stop
+bindsym $mod+shift+F10 --release exec $PATH/Files/conky/dzen-conky/kill_script/kill_stop-cont_script.sh cont
+
+########### Application Manager #############
+
+
+# start dmenu (a program launcher):
+## bindsym $mod+d exec --no-startup-id dmenu_run -p Ubuntu -sb '#d64937' -nb '#2D2D2D' -fn "-misc-droid sans-medium-r-normal-*-15-*-*-*-*-*-iso10646-*"
+
+# start rofi (a program launcher):
+bindsym $mod+d exec --no-startup-id rofi -show run -case-sensitive -bg 'white' -bc '#569BE4' -bw 2 -fg 'black' -hlbg '#569BE4' -hlfg 'white' -font ubuntu\ 11 -opacity 90 -eh 1.5 -lines 10 -columns 1 -width 40 -location 0 -padding 5 #-auto-select
+
+# Switch between windows (with rofi):
+bindsym mod1+Tab exec --no-startup-id rofi -show window -case-sensitive -bg 'white' -bc '#569BE4' -bw 2 -fg 'black' -hlbg '#569BE4' -hlfg 'white'  -font ubuntu\ 11 -opacity 90 -eh 1.5 -lines 10 -columns 1 -width 40 -location 0 -padding 5 #-auto-select
+
+# Lockscreen:
+bindsym XF86Sleep exec $PATH/Files/lock/i3-lock.sh
+bindsym $mod+XF86Sleep exec $PATH/Files/lock/i3-lock.sh && sleep 3s && exec systemctl suspend
+
+# Negative color:
+bindsym $mod+n --release exec killall -SIGSTOP redshift ; exec xcalib -i -a
+bindsym $mod+shift+n --release exec killall -SIGCONT redshift
+
+# Voice config:
+bindsym $mod+m exec $urxvt -e 'alsamixer'
+
+# Theme Manager:
+bindsym $mod+l exec lxappearance
+
+# Aumatic click for set red color in libreoffice :)
+## bindsym $mod+x exec xdotool mousemove 613 119 click 1
+
+# Jumping to specific windows:
+## bindsym $mod+a [class="urxvt" title="VIM"] focus
+# Arbitrary commands for specific windows (for_window):
+## for_window [class="^.*"] border pixel 2
+for_window [title="(?i)alsamixer"] $float
+for_window [class="(?i)firefox" window_role="About"] floating enable
+for_window [class="(?i)gxmessage"] $float
+for_window [class="(?i)lxappearance"] floating enable
+for_window [class="(?i)urxvt" instance="Time"] floating enable; resize set 900px 100px; 
+
+# Open applications on specific workspaces
+## assign [class="URxvt"] 2
+## xprop | grep WM_CLASS
+assign [class="(?i)audacity"] $ws1
+assign [class="(?i)firefox"] $ws1
+assign [class="(?i)libreoffice"] $ws1
+assign [class="(?i)gimp"] $ws1
+assign [class="(?i)lingot"] $ws1
+assign [class="(?i)musescore"] $ws1
+assign [class="(?i)viewnior"] $ws1
+assign [class="(?i)xfburn"] $ws1
+assign [class="(?i)libreoffice"] $ws1
+
+
+###### Exec app on specific workspace ######
+
+
+# Start application on workspace:
+## exec --no-startup-id i3-msg 'workspace 3; exec iceweasel; workspace 1'
+exec --no-startup-id sleep 2s ; telegram 
+exec --no-startup-id sleep 2s ; mlterm -name "XMPPro" -geometry 117x39+39+64 -e profanity -a "USER@DOMAIN"
+exec --no-startup-id sleep 2s ; $urxvt -name "Mediacenter" -geometry 79x21+342+370
+exec --no-startup-id sleep 3s ; $urxvt -name "Mocp" -geometry 117x15+40+65 -e mocp -T darkdot_theme
+exec --no-startup-id sleep 4s ; $PATH/Files/conky/media-conky/run_script.sh
+
+
+###### Bindsym for run app after boot ######
+bindsym $mod+F1 exec --no-startup-id $PATH/Files/dzen2/ubustrap/udzen.sh 
+bindsym $mod+F2 exec --no-startup-id mlterm -name "XMPPro" -geometry 117x39+39+64 -e profanity -a "USER@DOMAIN"
+bindsym $mod+F3 exec --no-startup-id telegram
+bindsym $mod+shift+F3 exec xdotool mousemove 960 83 click 1
+bindsym $mod+F4 exec --no-startup-id $PATH/Files/conky/media-conky/run_script.sh
+bindsym $mod+F5 exec --no-startup-id $urxvt -name "Mocp" -geometry 117x15+40+65 -e mocp -T darkdot_theme
+bindsym $mod+F6 exec --no-startup-id $urxvt -name "Mediacenter" -geometry 79x21+342+370
+
+
+########### Workspace Manager ###############
+
+
+##### Workspace $ws1:
+# Main URxvt
+assign [class="(?i)urxvt" instance="Main"] $ws1
+
+
+##### Workspace $ws2:
+# Run Profanity (XMPP Client)
+for_window [class="(?i)XMPPro" ] $float
+assign [class="(?i)XMPPro"] $ws2
+
+# Run Telegram Messanger
+for_window [class="(?i)telegram"] $float move position 41 66
+for_window [class="(?i)telegram" title="Choose"] border pixel 2 focus ; move position center
+for_window [class="(?i)telegram" title="Save"] border pixel 2 focus ; move position center
+assign [class="(?i)Telegram"] $ws2
+
+# Run DropDown URxvt 
+bindsym $mod+F12 exec $urxvt -name "dropdown"
+for_window [class="(?i)urxvt" instance="dropdown"] $float 
+for_window [class="(?i)urxvt" instance="dropdown"] move scratchpad; [class="(?i)urxvt" instance="dropdown"] scratchpad show; move position 0px 0px; resize shrink height 200px; resize grow width 683px; move scratchpad
+bindsym F12 [class="(?i)urxvt" instance="dropdown"] scratchpad show
+
+
+##### Workspace $ws3:
+# URxvt for run Media app
+for_window [class="(?i)urxvt" instance="Mediacenter" ] $float
+assign [class="(?i)urxvt" instance="Mediacenter"] $ws3
+
+# URxvt for run Mocp
+for_window [class="(?i)urxvt" instance="Mocp"] $float
+assign [class="(?i)urxvt" instance="Mocp"] $ws3
+# Put alias in ~/.bashrc or ~/.bash_aliases
+# alias mocp='urxvt -name "Mocp" -geometry 117x15+40+65 -e mocp -T darkdot_theme
+
+# Mplayer for Play Video
+for_window [class="(?i)mplayer"] $float 
+assign [class="(?i)mplayer"] $ws3
+# alias mplayer='mplayer -geometry 640x360+340+370'
+
+# Conky (Media List)
+for_window [class="(?i)Media-conky"] $float
+assign [class="(?i)Media-conky"] $ws3
+
+
+#### Automatically starting applications ####
+
+exec xrdb -merge $PATH/Files/urxvt/.Xresources # URxvt Config
+exec --no-startup-id sleep 5s ; $PATH_IS/main-wh.sh # See more: https://github.com/rasoolsn/interactive-script/
+exec --no-startup-id /usr/bin/kbdd # Automatic Chaneg Layout
+exec --no-startup-id /usr/bin/redshift # Optimize light Monitor
+exec --no-startup-id /usr/bin/feh --bg-fill $PATH/Files/wallpaper/Pure-Nature.jpg # Set Background
+exec --no-startup-id compton -b --config $PATH/Files/compton/compton.conf # Compositor Manager
+
+
+#############################################
+################# THE END ###################
+#############################################
