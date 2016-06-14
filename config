@@ -348,13 +348,10 @@ assign [class="(?i)urxvt" instance="Mediacenter"] $ws3
 # URxvt for run Mocp
 for_window [class="(?i)urxvt" instance="Mocp"] $float
 assign [class="(?i)urxvt" instance="Mocp"] $ws3
-# Put alias in ~/.bashrc or ~/.bash_aliases
-# alias mocp='urxvt -name "Mocp" -geometry 117x15+40+65 -e mocp -T darkdot_theme
 
 # Mplayer for Play Video
 for_window [class="(?i)mplayer"] $float 
 assign [class="(?i)mplayer"] $ws3
-# alias mplayer='mplayer -geometry 640x360+340+370'
 
 # Conky (Media List)
 for_window [class="(?i)Media-conky"] $float
