@@ -1,0 +1,3 @@
+# replace texts in ~/.bashrc
+
+PS1='${debian_chroot:+($debian_chroot)}(\#)[$(date +%H:%M)][\W]$ '
