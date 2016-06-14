@@ -1,0 +1,13 @@
+use_transbg = false
+fg_color = grey67
+bg_color = grey17
+cursor_fg_color = grey17
+cursor_bg_color = grey67
+blink_cursor = true
+line_space = 2
+use_scrollbar = false
+fontsize = 13
+use_anti_alias = false
+bel_mode = visual
+use clipboard = true
+logsize = 100000
