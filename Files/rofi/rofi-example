@@ -1,0 +1,5 @@
+# start rofi (a program launcher):
+rofi -show run -case-sensitive -bg 'white' -bc '#569BE4' -bw 2 -fg 'black' -hlbg '#569BE4' -hlfg 'white' -font ubuntu\ 11 -opacity 90 -eh 1.5 -lines 10 -columns 1 -width 40 -location 0 -padding 5 #-auto-select
+
+# Switch between windows (with rofi):
+rofi -show window -case-sensitive -bg 'white' -bc '#569BE4' -bw 2 -fg 'black' -hlbg '#569BE4' -hlfg 'white'  -font ubuntu\ 11 -opacity 90 -eh 1.5 -lines 10 -columns 1 -width 40 -location 0 -padding 5 #-auto-select
