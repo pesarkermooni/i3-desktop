@@ -4,7 +4,7 @@
 
 
 # Dependency:
-# compton, conky, dzen2, feh, fonts-droid, imagemagick, rofi, rxvt, scrot, slim
+# compton, conky, feh, fonts-droid, imagemagick, rofi, rxvt, scrot, slim
 # optional: kbdd, lxappearance, mlterm, mplayer, profanity, redshift, telegram, xcalib
 
 
@@ -179,44 +179,39 @@ popup_during_fullscreen smart
 
 ################ Statusbar ##################
 
-
-# Dzen2 Statusbar:
-exec --no-startup-id $PATH/Files/dzen2/ubustrap/udzen.sh
-
 # i3bar control:
 # bar hidden_state hide|show|toggle [<bar_id>]
 # bar mode dock|hide|invisible|toggle [<bar_id>]
 ## bindsym $mod+b bar mode hide bar-1
 
-## bindsym $mod+b bar mode toggle bar-1
-## bar {
-## 	status_command conky -c $PATH/Files/conky/i3status-conky/conky.conf
-## 	## status_command i3blocks -c ~/i3blocks.conf
-## 	## separator_symbol ":|:"
-## 	## status_command i3status --config ~/.i3status.conf
-## 	font pango:Droid Sans, FontAwesome 10
-## 	mode dock
-## 	id bar-1
-## 	position top
-## 	output VGA-1
-##         strip_workspace_numbers yes
-##         ## tray_padding 1
-## 	# tray_output none #(primary,LVDS1)
-## 	## workspace_buttons no
-## 	## binding_mode_indicator yes		
-## 
-## colors {
-##         background #2d2d2d
-##         statusline #dedede
-##         separator #2d2d2d
-## 
-##         focused_workspace  #357AC3 #357AC3 #dedede
-##         active_workspace   #2d2d2d #5f676a #dedede
-##         inactive_workspace #2d2d2d #2d2d2d #888888
-##         urgent_workspace   #2d2d2d #2d2d2d #888888
-##     }
-## 
-## }
+bindsym $mod+b bar mode toggle bar-1
+bar {
+	## status_command conky -c $PATH/Files/conky/i3status-conky/conky.conf
+	status_command i3blocks -c $PATH/Files/i3blocks/i3blocks.conf
+	## status_command i3status --config ~/.i3status.conf
+	font pango:FontAwesome, Ubuntu 10
+	mode dock
+	id bar-1
+	position top
+	output VGA-1
+        strip_workspace_numbers yes
+        ## tray_padding 1
+	# tray_output none #(primary,LVDS1)
+	## workspace_buttons no
+	## binding_mode_indicator yes		
+
+colors {
+        background #2d2d2d
+        statusline #ABABAB
+        separator #2d2d2d
+
+        focused_workspace  #357AC3 #357AC3 #dedede
+        active_workspace   #2d2d2d #5f676a #dedede
+        inactive_workspace #424242 #424242 #ABABAB
+        urgent_workspace   #2d2d2d #2d2d2d #888888
+    }
+
+}
 
 
 ################ Screenshot #################
@@ -235,9 +230,6 @@ bindsym $mod+Print --release exec "scrot -se 'mv $f ~/Screenshots'"
 bindsym $mod+F9 --release exec killall -SIGSTOP firefox
 bindsym $mod+shift+F9 --release exec killall -SIGCONT firefox
 
-# Conky
-bindsym $mod+F10 --release exec $PATH/Files/conky/dzen-conky/kill_script/kill_stop-cont_script.sh stop
-bindsym $mod+shift+F10 --release exec $PATH/Files/conky/dzen-conky/kill_script/kill_stop-cont_script.sh cont
 
 ########### Application Manager #############
 
@@ -305,7 +297,6 @@ exec --no-startup-id sleep 4s ; $PATH/Files/conky/media-conky/run_script.sh
 
 
 ###### Bindsym for run app after boot ######
-bindsym $mod+F1 exec --no-startup-id $PATH/Files/dzen2/ubustrap/udzen.sh 
 bindsym $mod+F2 exec --no-startup-id mlterm -name "XMPPro" -geometry 117x39+39+64 -e profanity -a "USER@DOMAIN"
 bindsym $mod+F3 exec --no-startup-id telegram
 bindsym $mod+shift+F3 exec xdotool mousemove 960 83 click 1
@@ -336,7 +327,7 @@ assign [class="(?i)Telegram"] $ws2
 # Run DropDown URxvt 
 bindsym $mod+F12 exec $urxvt -name "dropdown"
 for_window [class="(?i)urxvt" instance="dropdown"] $float 
-for_window [class="(?i)urxvt" instance="dropdown"] move scratchpad; [class="(?i)urxvt" instance="dropdown"] scratchpad show; move position 0px 0px; resize shrink height 200px; resize grow width 683px; move scratchpad
+for_window [class="(?i)urxvt" instance="dropdown"] move scratchpad; [class="(?i)urxvt" instance="dropdown"] scratchpad show; move position 0px 21px; resize shrink height 200px; resize grow width 683px; move scratchpad
 bindsym F12 [class="(?i)urxvt" instance="dropdown"] scratchpad show
 
 
@@ -362,12 +353,12 @@ assign [class="(?i)Media-conky"] $ws3
 
 exec xrdb -merge $PATH/Files/urxvt/.Xresources # URxvt Config
 exec --no-startup-id sleep 5s ; $PATH_IS/main-wh.sh # See more: https://github.com/rasoolsn/interactive-script/
+exec --no-startup-id $PATH/Files/i3blocks/aptlist_script/aptlist.sh
 exec --no-startup-id /usr/bin/kbdd # Automatic Chaneg Layout
 exec --no-startup-id /usr/bin/redshift # Optimize light Monitor
 exec --no-startup-id /usr/bin/feh --bg-fill $PATH/Files/wallpaper/Pure-Nature.jpg # Set Background
 exec --no-startup-id compton -b --config $PATH/Files/compton/compton.conf # Compositor Manager
 
-
-#############################################
-################# THE END ###################
-#############################################
+#################################
+############ THE END ############
+#################################
