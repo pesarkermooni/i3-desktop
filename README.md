@@ -14,7 +14,7 @@ Beautiful Desktop with i3wm, slim, etc.
 ---
 #### Required:
 ```
-bash compton conky dzen2 feh fonts-droid i3-wm i3lock imagemagick rofi rxvt scrot slim, vnstat
+bash compton conky dzen2 feh fonts-droid i3-wm i3lock imagemagick rofi rxvt scrot slim vnstat
 ```
 #### Optional:
 ```
